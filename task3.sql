@@ -79,7 +79,6 @@ insert into transactions (account_id, amount, transaction_date, transaction_type
 
 -- Запрос для решения задания
 
-explain (analyze, buffers, settings on)
 WITH aggregated_data AS (
     SELECT 
         a.client_id,

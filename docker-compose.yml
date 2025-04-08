@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: users_actives
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      PGPORT: 5435
+    volumes:
+      - db-data:/mnt/docker
+      - ./db:/docker-entrypoint-initdb.d
+    ports:
+      - "5435:5435"
+
+volumes:
+  db-data:

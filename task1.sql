@@ -80,20 +80,19 @@ insert into user_roles (id, user_id, role, assigned_at) values
 -- Запрос для решения задания
 
 SELECT 
-    u.id AS user_id,
+    u.id,
     u.username,
     STRING_AGG(DISTINCT ur.role, ', ') AS roles,
-    COUNT(DISTINCT CASE 
-        WHEN ua.activity_date >= '2023-08-01' AND ua.activity_date <= '2023-10-31' 
-        THEN ua.id 
-        END) AS activity_count
+    COUNT(ua.id) AS activity_count
 FROM 
     users u
 LEFT JOIN 
     user_roles ur ON u.id = ur.user_id
 LEFT JOIN 
     user_activity ua ON u.id = ua.user_id 
+	AND ua.activity_date >= '2023-10-01' 
+	AND ua.activity_date < '2023-11-01'
 GROUP BY 
-    u.id, u.username
+    u.id
 ORDER BY 
     activity_count DESC;
